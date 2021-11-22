@@ -141,7 +141,7 @@ const game = function () {
               fruit.style.backgroundImage = `url('${smashed[0]}.png')`;
 
               break;
-            case "pinapple":
+            case "pineapple":
               fruit.style.backgroundImage = `url('${smashed[3]}.png')`;
 
               break;

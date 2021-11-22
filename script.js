@@ -74,15 +74,27 @@ let fruitStart = [
 let count = 0;
 let opportunity = 5;
 let result = document.querySelector(".result");
-
+let fruits = [
+  "apple",
+  "orange",
+  "bananas",
+  "grape",
+  "pineapple",
+  "watermelon",
+  "apricot",
+];
 const game = function () {
   let roll = Math.floor(Math.random() * 25);
   let fruitPositioning = roll * fruitStart[roll];
   let fruit = document.createElement("div");
+  let fruitRoll = Math.floor(Math.random() * fruits.length);
+  let fruitname = fruits[fruitRoll];
+  console.log(fruitname);
+  fruit.style.backgroundImage = `url('${fruitname}.png')`;
+  fruit.classList.add("fruit");
+  container.appendChild(fruit);
   if (fruitPositioning) {
-    fruit.classList.add("fruit");
     fruit.style.left = `${fruitPositioning}px`;
-    container.appendChild(fruit);
     let checkPosition = function () {
       if ((fruit.style.display = "inline-block")) {
         let fruitPosition = fruit.getBoundingClientRect();

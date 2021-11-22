@@ -1,5 +1,7 @@
 const basket = document.querySelector(".basket");
 const container = document.querySelector(".container");
+const left = document.querySelector(".left");
+const right = document.querySelector(".right");
 let start = 0;
 
 basket.style.zIndex = "5";
@@ -31,6 +33,46 @@ document.addEventListener(
   },
   setTimeout(100)
 );
+left.addEventListener(
+  "click",
+  function (e) {
+    if (e.target === left) {
+      start += 10;
+      basket.style.right = `${start}px`;
+      if (start > 450) {
+        basket.style.right = "0px";
+        start = 0;
+      }
+    }
+
+    let basketmeter = function () {
+      basketPosition = basket.getBoundingClientRect();
+    };
+    setInterval(basketmeter, 5);
+  },
+  setTimeout(100)
+);
+
+right.addEventListener(
+  "click",
+  function (e) {
+    if (e.target === right) {
+      start -= 10;
+      basket.style.right = `${start}px`;
+    }
+    if (start < 0) {
+      basket.style.right = "450px";
+      start = 450;
+    }
+
+    let basketmeter = function () {
+      basketPosition = basket.getBoundingClientRect();
+    };
+    setInterval(basketmeter, 5);
+  },
+  setTimeout(100)
+);
+
 document.addEventListener(
   "mousemove",
   function (e) {

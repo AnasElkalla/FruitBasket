@@ -1,7 +1,7 @@
 const basket = document.querySelector(".basket");
 const container = document.querySelector(".container");
 const slider = document.querySelector("input");
-
+const trials = document.querySelector(".opportunity");
 let start = 0;
 
 basket.style.zIndex = "5";
@@ -72,7 +72,7 @@ let fruitStart = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
 ];
 let count = 0;
-let opportunity = 5;
+let opportunity = 10;
 let result = document.querySelector(".result");
 let fruits = [
   "apple",
@@ -83,6 +83,7 @@ let fruits = [
   "watermelon",
   "apricot",
 ];
+let smashed = [1, 2, 3, 4];
 const game = function () {
   let roll = Math.floor(Math.random() * 25);
   let fruitPositioning = roll * fruitStart[roll];
@@ -101,33 +102,67 @@ const game = function () {
         if (
           Math.floor(fruitPosition.bottom) -
             Math.floor(basketPosition.bottom) >=
-            -10 &&
+            -20 &&
           Math.floor(fruitPosition.bottom) -
             Math.floor(basketPosition.bottom) <=
-            10
+            20
         ) {
           if (
             Math.floor(fruitPosition.left) - Math.floor(basketPosition.left) >=
-              -20 &&
+              -30 &&
             Math.floor(fruitPosition.left) - Math.floor(basketPosition.left) <=
               30
           ) {
             console.log("good");
+            let grapped = new Audio("basket.mp3");
+            grapped.play();
             fruit.style.display = "none";
             count++;
             result.textContent = count;
           }
-        } else if (Math.floor(fruitPosition.bottom) === 0) {
+        } else if (
+          Math.floor(fruitPosition.bottom) > 580 &&
+          Math.floor(fruitPosition.bottom) < 600
+        ) {
+          console.log(Math.floor(basketPosition.bottom));
           console.log("lost fruit");
-          fruit.style.display = "none";
-        } else {
-          opportunity--;
-          return basketPosition.bottom;
+          function losingtrial() {
+            opportunity -= 1;
+          }
+          switch (fruitname) {
+            case "apple":
+              fruit.style.backgroundImage = `url('${smashed[1]}.png')`;
+              break;
+            case "orange":
+              fruit.style.backgroundImage = `url('${smashed[0]}.png')`;
+
+              break;
+            case "apricot":
+              fruit.style.backgroundImage = `url('${smashed[0]}.png')`;
+
+              break;
+            case "pinapple":
+              fruit.style.backgroundImage = `url('${smashed[3]}.png')`;
+
+              break;
+            case "watermelon":
+              fruit.style.backgroundImage = `url('${smashed[1]}.png')`;
+
+              break;
+            case "bananas":
+              fruit.style.backgroundImage = `url('${smashed[3]}.png')`;
+
+              break;
+            case "grape":
+              fruit.style.backgroundImage = `url('${smashed[2]}.png')`;
+
+              break;
+          }
         }
       }
     };
 
-    setInterval(checkPosition, 100);
+    setInterval(checkPosition, 50);
   }
 };
 

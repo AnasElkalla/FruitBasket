@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+
 * {
   box-sizing: border-box;
 }
@@ -8,6 +10,7 @@ body {
   align-items: center;
   text-align: center;
   overflow: hidden;
+  font-family: "Oswald", sans-serif;
 }
 .container {
   width: 500px;
@@ -50,7 +53,7 @@ body {
   animation-name: fruit;
   animation-duration: 5s;
   animation-iteration-count: 1;
-  animation-timing-function: linear;
+  animation-timing-function: ease-out;
   animation-fill-mode: forwards;
 }
 .container:not() {
@@ -65,10 +68,14 @@ body {
   }
   to {
     bottom: 0px;
+    visibility: hidden;
   }
 }
 .result {
   z-index: 10000;
+  position: relative;
+  font-size: 1.5rem;
+  display: inline-block;
 }
 object {
   visibility: hidden;
@@ -79,4 +86,9 @@ input {
   display: block;
   position: relative;
   margin: 0 auto;
+}
+.message {
+  color: red;
+  font-size: 2rem;
+  display: inline-block;
 }

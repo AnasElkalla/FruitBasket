@@ -1,0 +1,76 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+.container {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  border: 3px solid black;
+  position: relative;
+  margin: 100px auto;
+  background-image: url(Forest.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.basket {
+  justify-self: flex-end;
+  display: inline-block;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 1px solid red;
+  bottom: 50px;
+  left: 450;
+}
+.basket img {
+  width: 50px;
+  height: 50px;
+}
+.fruit {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: red;
+  bottom: 475px;
+  z-index: 0;
+  animation-name: fruit;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.container:not() {
+  z-index: 100;
+}
+@keyframes fruit {
+  from {
+    bottom: 475px;
+  }
+  to {
+    bottom: 100px;
+  }
+  to {
+    bottom: 0px;
+  }
+}
+.result {
+  z-index: 10000;
+}
+object {
+  visibility: hidden;
+  height: 0%;
+}

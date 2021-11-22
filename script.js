@@ -26,40 +26,37 @@ document.addEventListener(
     }
     let basketmeter = function () {
       basketPosition = basket.getBoundingClientRect();
-      console.log(basketPosition.item(0).left);
     };
-    setTimeout(basketmeter, 5);
+    setInterval(basketmeter, 5);
   },
   setTimeout(100)
 );
 document.addEventListener(
-  "keyup",
+  "mousemove",
   function (e) {
-    if (e.key === "ArrowLeft") {
-      start += 10;
+    if (e.movementX < 0) {
+      start += 5;
       basket.style.right = `${start}px`;
       if (start > 450) {
         basket.style.right = "0px";
         start = 0;
       }
-    }
-    if (e.key === "ArrowRight") {
-      start -= 10;
+    } else {
+      start -= 5;
       basket.style.right = `${start}px`;
-    }
-    if (start < 0) {
-      basket.style.right = "450px";
-      start = 450;
+
+      if (start < 0) {
+        basket.style.right = "450px";
+        start = 450;
+      }
     }
     let basketmeter = function () {
       basketPosition = basket.getBoundingClientRect();
-      console.log(basketPosition.item(0).left);
     };
-    setTimeout(basketmeter, 5);
+    setInterval(basketmeter, 5);
   },
-  10
+  setInterval(100)
 );
-
 let fruitStart = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
 ];
@@ -96,9 +93,13 @@ const game = function () {
             fruit.style.display = "none";
             count++;
             result.textContent = count;
-          } else {
-            opportunity--;
           }
+        } else if (Math.floor(fruitPosition.bottom) === 0) {
+          console.log("lost fruit");
+          fruit.style.display = "none";
+        } else {
+          opportunity--;
+          return basketPosition.bottom;
         }
       }
     };
@@ -108,3 +109,10 @@ const game = function () {
 };
 
 setInterval(game, 3000);
+container.addEventListener(
+  "mousemove",
+  function (e) {
+    container.style.cursor = "none";
+  },
+  10
+);

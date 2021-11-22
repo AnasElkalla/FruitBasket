@@ -73,10 +73,9 @@ object {
   visibility: hidden;
   height: 0%;
 }
-.btn {
-  border-radius: 50%;
+input {
+  width: 200px;
+  display: block;
   position: relative;
- 
-  display: inline-block;
-  margin-left: 50px;
+  margin: 0 auto;
 }

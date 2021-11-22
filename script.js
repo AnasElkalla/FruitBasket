@@ -1,12 +1,20 @@
 const basket = document.querySelector(".basket");
 const container = document.querySelector(".container");
-const left = document.querySelector(".left");
-const right = document.querySelector(".right");
+const slider = document.querySelector("input");
+
 let start = 0;
 
 basket.style.zIndex = "5";
 let basketPosition;
+slider.oninput = function () {
+  start = this.value;
+  basket.style.left = `${start}px`;
 
+  let basketmeter = function () {
+    basketPosition = basket.getBoundingClientRect();
+  };
+  setInterval(basketmeter, 5);
+};
 document.addEventListener(
   "keydown",
   function (e) {
@@ -33,47 +41,8 @@ document.addEventListener(
   },
   setTimeout(100)
 );
-left.addEventListener(
-  "click",
-  function (e) {
-    if (e.target === left) {
-      start += 10;
-      basket.style.right = `${start}px`;
-      if (start > 450) {
-        basket.style.right = "0px";
-        start = 0;
-      }
-    }
 
-    let basketmeter = function () {
-      basketPosition = basket.getBoundingClientRect();
-    };
-    setInterval(basketmeter, 5);
-  },
-  setTimeout(100)
-);
-
-right.addEventListener(
-  "click",
-  function (e) {
-    if (e.target === right) {
-      start -= 10;
-      basket.style.right = `${start}px`;
-    }
-    if (start < 0) {
-      basket.style.right = "450px";
-      start = 450;
-    }
-
-    let basketmeter = function () {
-      basketPosition = basket.getBoundingClientRect();
-    };
-    setInterval(basketmeter, 5);
-  },
-  setTimeout(100)
-);
-
-document.addEventListener(
+container.addEventListener(
   "mousemove",
   function (e) {
     if (e.movementX < 0) {
@@ -97,10 +66,10 @@ document.addEventListener(
     };
     setInterval(basketmeter, 5);
   },
-  setInterval(100)
+  setInterval(1000)
 );
 let fruitStart = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
 ];
 let count = 0;
 let opportunity = 5;

@@ -2,10 +2,20 @@ const basket = document.querySelector(".basket");
 const container = document.querySelector(".container");
 const slider = document.querySelector("input");
 const trials = document.querySelector(".opportunity");
+const image = document.querySelector(".basket img");
 let start = 0;
-
+let lives = 10;
+trials.textContent = 10;
 basket.style.zIndex = "5";
 let basketPosition;
+
+function gameOver() {
+  basket.innerHTML = "<h1>GAME OVER</h1>";
+  let gameOver = new audio(draw.mp3);
+  gameOver.play();
+  image.style.visibility = "hidden";
+}
+
 slider.oninput = function () {
   start = this.value;
   basket.style.left = `${start}px`;
@@ -84,7 +94,11 @@ let fruits = [
   "apricot",
 ];
 let smashed = [1, 2, 3, 4];
+let lostfruit = [];
+let good;
+
 const game = function () {
+  let fruitPosition;
   let roll = Math.floor(Math.random() * 25);
   let fruitPositioning = roll * fruitStart[roll];
   let fruit = document.createElement("div");
@@ -98,7 +112,8 @@ const game = function () {
     fruit.style.left = `${fruitPositioning}px`;
     let checkPosition = function () {
       if ((fruit.style.display = "inline-block")) {
-        let fruitPosition = fruit.getBoundingClientRect();
+        fruitPosition = fruit.getBoundingClientRect();
+
         if (
           Math.floor(fruitPosition.bottom) -
             Math.floor(basketPosition.bottom) >=
@@ -107,6 +122,7 @@ const game = function () {
             Math.floor(basketPosition.bottom) <=
             20
         ) {
+          good = true;
           if (
             Math.floor(fruitPosition.left) - Math.floor(basketPosition.left) >=
               -30 &&
@@ -122,16 +138,13 @@ const game = function () {
           }
         } else if (
           Math.floor(fruitPosition.bottom) > 580 &&
-          Math.floor(fruitPosition.bottom) < 600
+          Math.floor(fruitPosition.bottom) < 590
         ) {
-          console.log(Math.floor(basketPosition.bottom));
-          console.log("lost fruit");
-          function losingtrial() {
-            opportunity -= 1;
-          }
+          good = false;
           switch (fruitname) {
             case "apple":
               fruit.style.backgroundImage = `url('${smashed[1]}.png')`;
+
               break;
             case "orange":
               fruit.style.backgroundImage = `url('${smashed[0]}.png')`;
@@ -158,14 +171,20 @@ const game = function () {
 
               break;
           }
+          console.log("false");
+          lives = trials.textContent - 1;
+          return false;
         }
       }
     };
 
-    setInterval(checkPosition, 50);
+    setInterval(checkPosition, 10);
+    trials.textContent = lives;
+    if (lives === 0) {
+      gameOver();
+    }
   }
 };
-
 setInterval(game, 3000);
 container.addEventListener(
   "mousemove",

@@ -76,8 +76,7 @@ object {
 .btn {
   border-radius: 50%;
   position: relative;
-  left: 140px;
-  bottom: 200px;
+ 
   display: inline-block;
   margin-left: 50px;
 }
